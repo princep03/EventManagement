@@ -4,7 +4,7 @@ $email=$_POST['email'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "event_management";
+$dbname = "1529";
 use PHPMailer\PHPMailer\PHPMailer;
 
 require 'C:/xampp/htdocs/autoload.php';
