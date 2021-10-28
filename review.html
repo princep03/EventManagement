@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Reviews System</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+		<link href="review.css" rel="stylesheet" type="text/css">
+		<link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="css/core-style.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Responsive CSS -->
+    <link href="css/responsive.css" rel="stylesheet">
+	</head>
+	<body>
+	<div id="wrapper">
+
+        <!-- ****** Header Area Start ****** -->
+        <header class="header_area">
+            <!-- Top Header Area Start -->
+            <div class="top_header_area">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center justify-content-end">
+
+                        <div class="col-12 col-lg-7">
+                            <div class="top_single_area d-flex align-items-center">
+                                <!-- Logo Area -->
+                                <div class="top_logo">
+                                    <a href="#"><img src="img/core-img/logo.png" alt="" style="height:100px;"></a>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Header Area End -->
+            <div class="main_header_area">
+                <div class="container h-100">
+                    <div class="row h-100">
+                        <div class="col-12 d-md-flex justify-content-between">
+                            <!-- Header Social Area -->
+                            <!-- Menu Area -->
+                            <div class="main-menu-area">
+                                <nav class="navbar navbar-expand-lg align-items-start">
+
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#karl-navbar" aria-controls="karl-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"><i class="ti-menu"></i></span></button>
+
+                                    <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
+                                        <ul class="navbar-nav animated" id="nav">
+                                            <li class="nav-item active"><a class="nav-link" href="home.html">Home</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="Login.html">Login</a></li> 
+                                            <li class="nav-item"><a class="nav-link" href="Register.html">Register</a></li>  
+                                            <li class="nav-item"><a class="nav-link" href="review.html">Feedback</a></li>    											
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                            <!-- Help Line -->
+                            <div class="help-line">
+                                <a href="#"><i class="ti-headphone-alt"></i> +91 XXXXXXXXXXX</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+<div class="content home">
+	<h2>Reviews</h2>
+	<p>Check out the below reviews for our website.</p>
+<div class="reviews"></div>
+<script>
+const reviews_page_id = 1;
+fetch("reviews.php?page_id=" + reviews_page_id).then(response => response.text()).then(data => {
+	document.querySelector(".reviews").innerHTML = data;
+	document.querySelector(".reviews .write_review_btn").onclick = event => {
+		event.preventDefault();
+		document.querySelector(".reviews .write_review").style.display = 'block';
+		document.querySelector(".reviews .write_review input[name='name']").focus();
+	};
+	document.querySelector(".reviews .write_review form").onsubmit = event => {
+		event.preventDefault();
+		fetch("reviews.php?page_id=" + reviews_page_id, {
+			method: 'POST',
+			body: new FormData(document.querySelector(".reviews .write_review form"))
+		}).then(response => response.text()).then(data => {
+			document.querySelector(".reviews .write_review").innerHTML = data;
+		});
+	};
+});
+</script>
+		</div>
+	</body>
+</html>
